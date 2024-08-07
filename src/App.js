@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
+import Header from './components/Header';
+import ThemeSwitch from './themes/ThemeSwitch';
+
 import './App.css';
 
 function App() {
+  const [theme, setTheme] = useState('futurism');
+  const [nmMobile, setnmMobile] = useState('home');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="h-screen w-screen relative">
+      <Header theme={theme} setTheme={setTheme} nmMobile={nmMobile} setnmMobile={setnmMobile}/>
+      <ThemeSwitch theme={theme} setTheme={setTheme} nmMobile={nmMobile} setnmMobile={setnmMobile}/>
     </div>
   );
 }
