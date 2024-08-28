@@ -126,7 +126,7 @@ const Neubrutalism = () => {
     };
 
     return (
-        <div className='relative h-screen overflow-hidden'>
+        <div className='relative h-screen'>
         <section className="flex-grow grid lg:grid-cols-2 h-5/6 border-y-4 border-black mb-4 font-mono">
             <div className="w-screen lg:w-full flex items-center justify-center p-8 lg:border-r-4 border-black bg-violet-300 z-20">
             <div className='sm:w-full lg:w-3/4 flex flex-col items-center justify-center bg-white p-16 rounded-lg border-4 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)]'>
