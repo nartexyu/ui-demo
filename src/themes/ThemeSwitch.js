@@ -5,8 +5,9 @@ import Neumorphism from './Neumorphism';
 import RetroFuturism from './RetroFuturism';
 import Glassmorphism from './Glassmorphism';
 
+// ThemeSwitch component handles the rendering of different UI themes based on the selected theme prop.
 const ThemeSwitch = ({ theme, setTheme, nmMobile }) => {
-    console.log('Current theme:', theme);
+    // console.log('Current theme:', theme);
     switch (theme) {
         case 'bauhaus':
             return <Bauhaus />;

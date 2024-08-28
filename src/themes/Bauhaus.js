@@ -3,234 +3,258 @@ import axios from 'axios';
 import * as echarts from 'echarts';
 import { addDays, format, startOfToday, startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
 
+// Calendar component that renders a clickable calendar for date selection, restricted to today and the next two days because of API restrictions (free is forecast +2 days, paid is +- 14)
 const Calendar = ({ onSelectDate }) => {
-    const today = startOfToday();
-    const monthStart = startOfMonth(today);
-    const monthEnd = endOfMonth(monthStart);
-    const startDate = startOfWeek(monthStart, { weekStartsOn: 0 });
-    const endDate = endOfWeek(monthEnd, { weekStartsOn: 0 });
-  
-    const isWithinNextTwoWeeks = (date) => {
-      const endOfNextTwoWeeks = addDays(today, 1);
-      return date <= endOfNextTwoWeeks;
-    };
-  
-    const renderCalendar = () => {
+  const today = startOfToday();
+  const tomorrow = addDays(today, 1);
+  const dayAfterTomorrow = addDays(today, 2);
+
+  // Check if a date is within today or the next two days
+  const isWithinNextTwoDays = (date) => {
+      return date.getTime() === today.getTime() || 
+             date.getTime() === tomorrow.getTime() || 
+             date.getTime() === dayAfterTomorrow.getTime();
+  };
+
+  // Render the calendar with clickable dates for today and the next two days
+  const renderCalendar = () => {
+      const monthStart = startOfMonth(today);
+      const monthEnd = endOfMonth(monthStart);
+      const startDate = startOfWeek(monthStart, { weekStartsOn: 0 });
+      const endDate = endOfWeek(monthEnd, { weekStartsOn: 0 });
       const calendarDays = eachDayOfInterval({ start: startDate, end: endDate });
-  
+
       return calendarDays.map((date) => {
-        const isClickable = isWithinNextTwoWeeks(date);
-        const isToday = date.getTime() === today.getTime();
-  
-        return (
-          <div
-            key={date}
-            className={`pl-2 pt-2 hover:bg-blue-500 transition-all duration-200 ease-in-out ${isClickable ? 'cursor-pointer' : ''} ${isToday ? 'text-white bg-black' : 'bg-yellow-50 '}`}
-            style={{ pointerEvents: isClickable ? 'auto' : 'none' }}
-            onClick={() => isClickable && onSelectDate(date)}
-          >
-            {format(date, 'd')}
-          </div>
-        );
+          const isClickable = isWithinNextTwoDays(date);
+          const isToday = date.getTime() === today.getTime();
+
+          return (
+              <div
+                  key={date}
+                  className={`pl-2 pt-2 hover:bg-blue-500 transition-all duration-200 ease-in-out ${isClickable ? 'cursor-pointer' : ''} ${isToday ? 'text-white bg-black' : 'bg-yellow-50 '}`}
+                  style={{ pointerEvents: isClickable ? 'auto' : 'none' }} 
+                  onClick={() => isClickable && onSelectDate(date)} 
+              >
+                  {format(date, 'd')} 
+              </div>
+          );
       });
-    };
-  
-    return (
+  };
+
+  return (
       <div className="grid grid-cols-7 gap-0 w-full h-full">
-        {renderCalendar()}
+          {renderCalendar()}
       </div>
-    );
+  );
 };
 
-const WeatherGraph = ({ hourlyData }) => {
-    const chartRef = React.useRef(null);
-  
-    useEffect(() => {
-        if (chartRef.current && hourlyData.length > 0) {
-          const chart = echarts.init(chartRef.current);
-      
-          const currentTime = new Date().getHours();
-          const hoursBefore = 12;
-          const hoursAfter = 13; // Adjusted to ensure we have enough labels on both sides
-      
+// WeatherGraph component that renders a line chart displaying hourly weather data for a specific day
+const WeatherGraph = ({ hourlyData, yAxisMin, yAxisMax }) => {
+  // Reference to the chart container
+  const chartRef = React.useRef(null); 
+
+  useEffect(() => {
+      if (chartRef.current && hourlyData.length > 0) {
+          const chart = echarts.init(chartRef.current); 
+
+          // Center the current time to +-12 hours purely for even aesthetics
+          const currentTime = new Date().getHours(); 
+          const hoursBefore = 12; 
+          const hoursAfter = 13; 
+
           const currentHourIndex = hourlyData.findIndex(
-            (hour) => new Date(hour.time).getHours() === currentTime
+              (hour) => new Date(hour.time).getHours() === currentTime
           );
-      
+
           let previousHours = [];
           let nextHours = [];
-      
-          // Get previous 12 hours
-          if (currentHourIndex < hoursBefore) {
-            const missingHours = hoursBefore - currentHourIndex;
-            previousHours = hourlyData.slice(-missingHours).concat(hourlyData.slice(0, currentHourIndex));
-          } else {
-            previousHours = hourlyData.slice(currentHourIndex - hoursBefore, currentHourIndex);
+
+          // Get previous 12 hours of data, handling wrap-around cases at the start of the array
+          for (let i = 1; i <= hoursBefore; i++) {
+              const index = (currentHourIndex - i + hourlyData.length) % hourlyData.length;
+              previousHours.unshift(hourlyData[index]);
           }
-      
-          // Get next 15 hours
-          if (currentHourIndex + hoursAfter >= hourlyData.length) {
-            const missingHours = (currentHourIndex + hoursAfter) - hourlyData.length;
-            nextHours = hourlyData.slice(currentHourIndex).concat(hourlyData.slice(0, missingHours));
-          } else {
-            nextHours = hourlyData.slice(currentHourIndex, currentHourIndex + hoursAfter);
+
+          // Get next 13 hours of data, handling wrap-around cases at the end of the array
+          for (let i = 0; i < hoursAfter; i++) {
+              const index = (currentHourIndex + i) % hourlyData.length;
+              nextHours.push(hourlyData[index]);
           }
-      
-          // Ensure we have exactly 12 hours before and 15 hours after the current hour
-          if (previousHours.length < hoursBefore) {
-            const additionalHours = hoursBefore - previousHours.length;
-            previousHours = [...Array(additionalHours).fill({ temp_c: null, time: '' }), ...previousHours];
-          }
-          if (nextHours.length < hoursAfter) {
-            const additionalHours = hoursAfter - nextHours.length;
-            nextHours = [...nextHours, ...Array(additionalHours).fill({ temp_c: null, time: '' })];
-          }
-      
+
           const displayedHours = [...previousHours, ...nextHours];
-      
+
           const option = {
-            xAxis: {
-              type: 'category',
-              data: displayedHours.map((hour, index) => {
-                if (hour.time === '') return '';
-                const time = new Date(hour.time);
-                return format(time, index === hoursBefore ? "'NOW'" : 'ha');
-              }),
-              axisLabel: {
-                show: true,
-                color: '#000',
-                align: 'center',
-              },
-              axisLine: {
-                show: false,
-              },
-              axisTick: {
-                show: false,
-              },
-            },
-            yAxis: {
-              type: 'value',
-              axisLine: { show: false },
-              splitLine: { show: false },
-              axisLabel: { show: false },
-            },
-            grid: {
-              left: '5%',
-              right: '5%',
-              bottom: '30%',
-              containLabel: true,
-            },
-            series: [
-              {
-                data: displayedHours.map((hour, index) => ({
-                  value: hour.temp_c,
-                  itemStyle: {
-                    color: '#000',
+              xAxis: {
+                  type: 'category',
+                  data: displayedHours.map((hour, index) => {
+                      if (!hour.time) return ''; 
+                      const time = new Date(hour.time);
+                      return format(time, index === hoursBefore ? "'NOW'" : 'ha'); 
+                  }),
+                  axisLabel: {
+                      show: true,
+                      color: '#000',
+                      align: 'center',
+                      margin: 0,
                   },
-                  label: {
-                    show: index === hoursBefore,
-                    position: 'top',
-                    formatter: `${hour.temp_c}°`,
-                    color: '#000',
+                  axisLine: {
+                      show: false,
                   },
-                })),
-                type: 'line',
-                smooth: true,
-                lineStyle: {
-                  width: 2,
-                  color: '#000',
-                },
-                symbol: 'none',
-                markPoint: {
-                  data: [
-                    {
-                      coord: [hoursBefore, hourlyData[currentHourIndex].temp_c],
-                      symbol: 'circle',
-                      symbolSize: 12,
-                      label: {
-                        show: true,
-                        position: 'top',
-                        formatter: `${hourlyData[currentHourIndex].temp_c}°`,
-                        color: '#000',
+                  axisTick: {
+                      show: false,
+                  },
+              },
+              yAxis: {
+                  type: 'value',
+                  min: yAxisMin, 
+                  max: yAxisMax,
+                  axisLine: { show: false },
+                  splitLine: { show: false },
+                  axisLabel: { show: false },
+              },
+              grid: {
+                  left: '5%',
+                  right: '5%',
+                  bottom: '20%',
+                  top: '20%',
+                  containLabel: true,
+              },
+              series: [
+                  {
+                      data: displayedHours.map((hour, index) => ({
+                          value: hour.temp_c,
+                          itemStyle: {
+                              color: '#000',
+                          },
+                          label: {
+                              show: index === hoursBefore,
+                              position: 'top',
+                              formatter: `${hour.temp_c}°`,
+                              color: '#000',
+                          },
+                      })),
+                      type: 'line',
+                      smooth: true,
+                      lineStyle: {
+                          width: 2,
+                          color: '#000',
                       },
-                      itemStyle: {
-                        color: '#000',
+                      symbol: 'none',
+                      markPoint: {
+                          data: [
+                              {
+                                  coord: [hoursBefore, hourlyData[currentHourIndex].temp_c],
+                                  symbol: 'circle',
+                                  symbolSize: 12,
+                                  label: {
+                                      show: true,
+                                      position: 'top',
+                                      formatter: `${hourlyData[currentHourIndex].temp_c}°`,
+                                      color: '#000',
+                                  },
+                                  itemStyle: {
+                                      color: '#000',
+                                  },
+                              },
+                          ],
                       },
-                    },
-                  ],
-                },
-                emphasis: {
-                  itemStyle: {
-                    color: '#000',
-                    symbol: 'circle',
-                    symbolSize: 10,
+                      emphasis: {
+                          itemStyle: {
+                              color: '#000',
+                              symbol: 'circle',
+                              symbolSize: 10,
+                          },
+                          label: {
+                              show: true,
+                              position: 'top',
+                              formatter: (params) => `${params.value}°C`,
+                              color: '#000',
+                          },
+                      },
                   },
-                  label: {
-                    show: true,
-                    position: 'top',
-                    formatter: (params) => `${params.value}°C`,
-                    color: '#000',
+              ],
+              tooltip: {
+                  trigger: 'axis',
+                  formatter: (params) => {
+                      const data = params[0].data;
+                      return `${data.value}°C`; 
                   },
-                },
+                  axisPointer: {
+                      type: 'none',
+                  },
               },
-            ],
-            tooltip: {
-              trigger: 'axis',
-              formatter: (params) => {
-                const data = params[0].data;
-                return `${data.value}°C`;
-              },
-              axisPointer: {
-                type: 'none', // Remove the line
-              },
-            },
-            backgroundColor: 'transparent',
+              backgroundColor: 'transparent',
           };
-      
+
           chart.setOption(option);
-        }
-      }, [hourlyData]);
-  
-    return <div ref={chartRef} className='w-[100%] lg:w-[50%] h-[100%]'></div>;
-}; 
+      }
+  }, [hourlyData]);
 
+  return <div ref={chartRef} className='w-[100%] lg:w-[50%] h-[100%]'></div>; 
+};
+
+// Main component
 const Bauhaus = () => {
-    const [inputValue, setInputValue] = useState('');
-    const [weatherData, setWeatherData] = useState(null);
-    const [selectedDay, setSelectedDay] = useState(null);
-    const [hourlyData, setHourlyData] = useState([]);
+  const [inputValue, setInputValue] = useState(''); 
+  const [weatherData, setWeatherData] = useState(null); 
+  const [selectedDay, setSelectedDay] = useState(null); 
+  const [hourlyData, setHourlyData] = useState([]); 
+  const [yAxisMin, setYAxisMin] = useState(null);
+  const [yAxisMax, setYAxisMax] = useState(null);
 
-    useEffect(() => {
-        fetchWeatherData('Los Angeles');
-    }, []);
+  // Fetch weather data for Los Angeles as default on component mount
+  useEffect(() => {
+      fetchWeatherData('Los Angeles');
+  }, []);
 
-    const fetchWeatherData = async (city) => {
-        try {
-        const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-        const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=14`);
-        setWeatherData(response.data.forecast.forecastday);
-        setSelectedDay(response.data.forecast.forecastday[0]);
-        setHourlyData(response.data.forecast.forecastday[0].hour);
-        } catch (error) {
-        console.error("Error fetching weather data", error);
-        }
-    };
+  // Function to fetch weather data for the specified city from the weather API
+  const fetchWeatherData = async (city) => {
+      try {
+          const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+          const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3`); 
+          setWeatherData(response.data.forecast.forecastday); 
+          
+          const todayData = response.data.forecast.forecastday[0]; 
+            setSelectedDay(todayData);
+            setHourlyData(todayData.hour);
 
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value.toUpperCase());
-    };
+            // Setting Y-axis min and max based on today's temperatures
+            const minTemp = todayData.day.mintemp_c;
+            const maxTemp = todayData.day.maxtemp_c;
 
-    const handleInputKeyPress = (e) => {
-        if (e.key === 'Enter') {
-        fetchWeatherData(inputValue);
-        }
-    };
+            setYAxisMin(minTemp - 5); 
+            setYAxisMax(maxTemp + 5);
+      } catch (error) {
+          console.error("Error fetching weather data", error);
+      }
+  };
 
-    const handleSelectDate = (date) => {
-        const selectedData = weatherData.find((item) => new Date(item.date).toDateString() === date.toDateString());
-        setSelectedDay(selectedData);
-        setHourlyData(selectedData.hour);
-    };
+  // Handle input changes and convert city name to uppercase.
+  const handleInputChange = (e) => {
+      setInputValue(e.target.value.toUpperCase());
+  };
+
+  // Handle date selection from the calendar and update the displayed weather data.
+  const handleSelectDate = (date) => {
+      const selectedData = weatherData.find((item) => {
+          const apiDate = new Date(item.date); 
+          const localApiDate = new Date(apiDate.getUTCFullYear(), apiDate.getUTCMonth(), apiDate.getUTCDate());
+          const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+          return localApiDate.toDateString() === localDate.toDateString();
+      });
+      setSelectedDay(selectedData); 
+      setHourlyData(selectedData.hour); 
+      setYAxisMin(selectedData.day.mintemp_c - 5);
+      setYAxisMax(selectedData.day.maxtemp_c + 5);
+  };
+
+  // TODO: Change SVG type based on API weather condition
+  // 1. Create a `getWeatherIcon(condition)` function:
+  //    - Map weather conditions (e.g., 'sunny', 'rain', 'snow') to specific SVG icons and background colors.
+  // 2. Replace the current SVG in the JSX with `getWeatherIcon(selectedDay.day.condition.text)`:
+  //    - Use the function to dynamically render the correct icon based on the weather condition.
+  // 3. Ensure the SVG updates when the weather condition changes (e.g., on date selection or time).
 
   return (
     <div className="flex h-screen">
@@ -323,7 +347,7 @@ const Bauhaus = () => {
                 </div>
             </div>
 
-            <div className="flex flex-row items-center justify-center w-full h-1/5 space-x-16 mb-4 lg:mt-12">
+            <div className="flex flex-row items-center justify-center w-full h-1/6 space-x-16 mb-4 lg:mt-6">
                 <div className="flex items-center justify-center space-x-2">
                     <div className="flex items-center justify-center w-8 h-8 bg-transparent rounded-full">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -356,8 +380,8 @@ const Bauhaus = () => {
             </div>
 
 
-            <div className='flex items-center justify-center w-full h-1/4'>
-                <WeatherGraph hourlyData={hourlyData} />
+            <div className='flex items-center justify-center w-full h-1/3'>
+                <WeatherGraph hourlyData={hourlyData} yAxisMin={yAxisMin} yAxisMax={yAxisMax}/>
             </div>
         </div>
 
