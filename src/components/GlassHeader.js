@@ -22,7 +22,7 @@ const GlassHeader = ({ setTheme }) => {
 
     const handleLogin = () => {
         const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-        const redirectUri = 'http://localhost:3000/';
+        const redirectUri = 'https://ui-demo-psi.vercel.app/';
         const scopes = [
             'user-read-playback-state',
             'user-modify-playback-state',
@@ -95,7 +95,7 @@ const GlassHeader = ({ setTheme }) => {
                     <div 
                         key={index}
                         className="col-span-1 font-normal h-full flex items-center justify-center cursor-pointer hover:scale-105 transition duration-300 ease-in-out hover:drop-shadow-lg"
-                        onClick={() => setTheme(theme)}
+                        onClick={() => setTheme(theme.toLowerCase())}
                     >
                         {theme.charAt(0).toUpperCase() + theme.slice(1)}
                     </div>
