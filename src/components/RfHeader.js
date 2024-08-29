@@ -37,19 +37,19 @@ const FuturismHeader = ({ setTheme }) => {
                     }`}
                 >
                     <div className="flex flex-col items-center justify-center h-full">
-                        {['BAUHAUS', 'NEUMORPHISM', 'RETRO-FUTURISM', 'GLASSMORPHISM', 'NEUBRUTALISM'].map((item, index) => (
+                        {['NEUBRUTALISM', 'NEUMORPHISM', 'GLASSMORPHISM', 'BAUHAUS', 'RETRO-FUTURISM'].map((themeName, index) => (
                             <div
-                                key={item}
+                                key={themeName}
                                 className={`font-mono font-bold mb-4 p-4 flex items-center justify-center rounded-md transition-all ${
-                                    item === 'RETRO-FUTURISM' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white'
+                                    themeName === 'RETRO-FUTURISM' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white'
                                 } hover:shadow-md hover:shadow-white`}
                                 style={{ opacity: 100 }}
                                 ref={(el) => (menuItemsRef.current[index] = el)}
                                 onClick={() => {
-                                    setTheme(item.toLowerCase().replace(/ /g, '-'));
+                                    setTheme(themeName.toLowerCase().replace(/ /g, '-'));
                                 }}
                             >
-                                {item}
+                                {themeName}
                             </div>
                         ))}
                     </div>
@@ -67,7 +67,7 @@ const FuturismHeader = ({ setTheme }) => {
                 <div
                     key={themeName}
                     className='cursor-pointer text-black text-lg px-3 py-2 rounded-md transition-all hover:shadow-md hover:shadow-white hover:bg-gray-800 hover:text-white'
-                    onClick={() => setTheme(themeName)}
+                    onClick={() => setTheme(themeName.toLowerCase().replace(/ /g, '-'))}
                 >
                     {themeName.charAt(0).toUpperCase() + themeName.slice(1)}
                 </div>

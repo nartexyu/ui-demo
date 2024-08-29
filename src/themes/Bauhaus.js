@@ -245,7 +245,7 @@ const Bauhaus = () => {
       });
       setSelectedDay(selectedData); 
       setHourlyData(selectedData.hour); 
-      setYAxisMin(selectedData.day.mintemp_c - 5);
+      setYAxisMin(selectedData.day.mintemp_c - 5); // Adding a buffer for better visualization
       setYAxisMax(selectedData.day.maxtemp_c + 5);
   };
 
