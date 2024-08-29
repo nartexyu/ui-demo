@@ -10,7 +10,7 @@ function App() {
   const [nmMobile, setnmMobile] = useState('home');
 
   return (
-    <div className="h-screen w-screen relative">
+    <div className="relative">
       <Header theme={theme} setTheme={setTheme} nmMobile={nmMobile} setnmMobile={setnmMobile}/>
       <ThemeSwitch theme={theme} setTheme={setTheme} nmMobile={nmMobile} setnmMobile={setnmMobile}/>
     </div>

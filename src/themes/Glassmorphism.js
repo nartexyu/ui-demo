@@ -254,7 +254,7 @@ const Glassmorphism = () => {
     };
 
     return (
-        <section className="h-full w-full bg-cover bg-center z-0 overflow-hidden" style={{ backgroundImage: playbackState && playbackState.img ? `url(${playbackState.img})` : `url(${process.env.PUBLIC_URL}/brutalism.jpg)` }}>
+        <section className="h-full w-full bg-cover bg-center z-0 overflow-hidden h-screen w-screen" style={{ backgroundImage: playbackState && playbackState.img ? `url(${playbackState.img})` : `url(${process.env.PUBLIC_URL}/brutalism.jpg)` }}>
             <div className={`h-full w-full flex flex-col items-center justify-center backdrop-filter backdrop-blur-3xl z-10 transition-all duration-200 ease-in-out ${isLightMode ? 'bg-white bg-opacity-10' : 'bg-black bg-opacity-50'}`}>
                 <div className="h-3/4 w-full flex flex-col items-center justify-center mt-32 lg:mt-24">
                     <div className="relative h-80 w-80 lg:h-96 lg:w-96 bg-white bg-opacity-10 backdrop-blur-3xl rounded-3xl p-6 flex flex-col items-center justify-center shadow-xl">
