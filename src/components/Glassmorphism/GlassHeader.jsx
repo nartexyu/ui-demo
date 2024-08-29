@@ -42,10 +42,12 @@ const GlassHeader = ({ setTheme }) => {
         console.log('Token deleted');
     };
 
+    // Function to capture position of drag/swipe for mobile header
     const handleDragStart = (e) => {
         startXRef.current = e.clientX || e.touches[0].clientX;
     };
 
+    //  Function to handle end of drag/swipe, rotating the theme
     const handleDragEnd = (e) => {
         const endX = e.clientX || e.changedTouches[0].clientX;
         if (endX > startXRef.current + 50) {
@@ -55,6 +57,7 @@ const GlassHeader = ({ setTheme }) => {
         }
     };
 
+    // Function to rotate the theme based on direction for mobile header
     const rotateTheme = (direction) => {
         setFade(true);
         setTimeout(() => {
@@ -63,6 +66,7 @@ const GlassHeader = ({ setTheme }) => {
         }, 200); // Duration of the fade-out transition
     };
 
+    // Function to set theme on click
     const handleClick = (theme) => {
         setTheme(theme);
     };

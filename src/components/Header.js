@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import NbHeader from './NbHeader';
-import NmHeader from './NmHeader';
-import GlassHeader from './GlassHeader';
-import BauhausHeader from './BauhausHeader';
-import RfHeader from './RfHeader';
-import Neubrutalism from '../themes/Neubrutalism';
+import NbHeader from './Neubrutalism/NbHeader';
+import NmHeader from './Neumorphism/NmHeader';
+import GlassHeader from './Glassmorphism/GlassHeader';
+import BauhausHeader from './Bauhaus/BauhausHeader';
+import RfHeader from './Retro-futurism/RfHeader';
+import Neubrutalism from './Neubrutalism/NbHeader';
 
 const Header = ({ theme, setTheme, nmMobile, setnmMobile }) => {
     const renderHeaderContent = () => {

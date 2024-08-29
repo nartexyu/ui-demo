@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { Environment, Float, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Book } from '../components/Book';
-import DottedPlane from "../components/DottedPlane";
+import { Book } from '../components/Retro-futurism/Book';
+import DottedPlane from "../components/Retro-futurism/DottedPlane";
 import { useAtom } from "jotai";
-import { books, bookAtom } from "../components/FuturismPages";
+import { books, bookAtom } from "../components/Retro-futurism/FuturismPages";
 
 const RetroFuturism = () => {
   const [currentBook, setCurrentBook] = useAtom(bookAtom);

@@ -12,29 +12,13 @@ const Glassmorphism = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isTrackChanging, setIsTrackChanging] = useState(false);
-    const startXRef = useRef(null);
-
-    const handleTouchStart = (e) => {
-        startXRef.current = e.touches[0].clientX;
-    };
-
-    const handleTouchMove = (e) => {
-        const currentX = e.touches[0].clientX;
-        const diffX = currentX - startXRef.current;
-
-        if (diffX > 50) { // Threshold for swipe right
-            setIsOpen(true);
-        }
-    };
-
-    const handleTouchEnd = () => {
-        startXRef.current = null;
-    };
-
+    
+    // Function to toggle light mode
     const lightMode = () => {
         setIsLightMode(!isLightMode);
     };
 
+    // useEffect to extract Spotify API token from the URL hash and store it in localStorage. standin for user authentication, would use some sort os sso
     useEffect(() => {
         const hash = window.location.hash;
         let token = window.localStorage.getItem("token");
@@ -48,12 +32,14 @@ const Glassmorphism = () => {
         setToken(token);
     }, []);
 
+    // useEffect to fetch the current playback state when the token changes
     useEffect(() => {
-        if (token) {
+        if (token) { 
             getPlaybackState();
         }
     }, [token]);
 
+    // Function to fetch the current playback state from Spotify API
     const getPlaybackState = async () => {
         try {
             const response = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -83,6 +69,7 @@ const Glassmorphism = () => {
         }
     };
 
+    // Function to skip to the next track in the queue from Spotify API
     const getNextTrack = async () => {
         try {
             const response = await axios.get('https://api.spotify.com/v1/me/player/queue', {
@@ -104,6 +91,7 @@ const Glassmorphism = () => {
         }
     };
 
+    // Function to start playback using Spotify API
     const startPlayback = async () => {
         try {
             await axios.put('https://api.spotify.com/v1/me/player/play', {}, {
@@ -118,6 +106,7 @@ const Glassmorphism = () => {
         }
     };
 
+    // Function to skip to the previous song using Spotify API
     const pausePlayback = async () => {
         try {
             await axios.put('https://api.spotify.com/v1/me/player/pause', {}, {
@@ -290,7 +279,7 @@ const Glassmorphism = () => {
                         </div>
                     </div>
                     <div className='relative flex flex-col items-center justify-center mt-20 lg:mt-8 text-white drop-shadow-lg'>
-                        <h1 className='text-2xl lg:text-3xl font-light mb-4'>{playbackState ? playbackState.name : 'Song Title'}</h1>
+                        <h1 className='text-3xl lg:text-3xl font-light mb-4'>{playbackState ? playbackState.name : 'Song Title'}</h1>
                         <h2 className='text-lg lg:text-2xl font-light '>{playbackState ? playbackState.artist : 'Artist Name'}</h2>
                     </div>
                 </div>
@@ -366,15 +355,21 @@ const Glassmorphism = () => {
 
                     {/* Sliding Panel */}
                     <div
-                        className={`fixed top-0 left-0 h-full w-1/5 bg-white bg-opacity-30 backdrop-blur-xl shadow-lg transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} ${isLightMode ? 'bg-opacity-40 ' : 'bg-opacity-20'}`}
+                        className={`fixed top-0 left-0 h-full w-full lg:w-1/5 bg-white bg-opacity-30 backdrop-blur-xl shadow-lg transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'} ${isLightMode ? 'bg-opacity-40 ' : 'bg-opacity-20'}`}
                         onMouseEnter={() => setIsOpen(true)} // Keep panel open on hover
                         onMouseLeave={() => setIsOpen(false)} // Close panel when leaving
-                        onTouchStart={handleTouchStart}
-                        onTouchMove={handleTouchMove}
-                        onTouchEnd={handleTouchEnd}
                         style={{ zIndex: 30 }} // Ensure the panel is above other elements
                     >
                         <div className="p-8">
+                        <button 
+                            className={`absolute top-4 right-4 bg-white bg-opacity-30 rounded-full p-2 shadow-lg ${isLightMode ? 'bg-opacity-40 ' : 'bg-opacity-20'}`} 
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {/* X icon */}
+                            <svg className="w-6 h-6 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                             <h2 className="text-lg lg:text-2xl font-normal mb-4">Search Tracks</h2>
                             <form onSubmit={handleSearch}>
                                 <input
