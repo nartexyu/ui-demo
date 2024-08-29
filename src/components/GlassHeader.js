@@ -7,6 +7,7 @@ const GlassHeader = ({ setTheme }) => {
     const startXRef = useRef(null);
     const [token, setToken] = useState('');
 
+    // useEffect to manage the Spotify token, storing it in localStorage if found in the URL hash
     useEffect(() => {
         const hash = window.location.hash;
         let token = window.localStorage.getItem("token");
@@ -20,6 +21,7 @@ const GlassHeader = ({ setTheme }) => {
         setToken(token);
     }, []);
 
+    // Function to handle Spotify login redirection
     const handleLogin = () => {
         const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
         const redirectUri = 'https://ui-demo-psi.vercel.app/';
@@ -33,6 +35,7 @@ const GlassHeader = ({ setTheme }) => {
         window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`;
     };
 
+    // Function to handle Spotify logout
     const handleLogout = () => {
         localStorage.removeItem('token');
         setToken('');

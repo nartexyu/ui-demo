@@ -7,15 +7,15 @@ const NbHeader = ({ setTheme }) => {
 
     useEffect(() => {
         if (isOpen) {
-        gsap.to(menuItemsRef.current, {
-            x: 0,
-            stagger: -0.3,
-            duration: 0,
+            gsap.to(menuItemsRef.current, {
+                x: 0,
+                stagger: -0.3,
+                duration: 0,
         });
         } else {
-        gsap.to(menuItemsRef.current, {
-            x: '100%',
-            duration: 0,
+            gsap.to(menuItemsRef.current, {
+                x: '100%',
+                duration: 0,
         });
         }
     }, [isOpen]);
@@ -25,7 +25,7 @@ const NbHeader = ({ setTheme }) => {
     };
 
     return (
-        <header>
+        <header className={`${isOpen ? '' : 'overflow-hidden'}`}>
         {/* Mobile Header */}
             <div className="bg-white text-black border-black p-4 lg:hidden relative z-50">
                 <div className="flex justify-between items-center">
