@@ -84,6 +84,7 @@ const WeatherDisplay = () => {
 
       <div className="flex flex-col items-center justify-center mt-4 w-3/4 lg:w-full h-1/2">
         <div className="flex items-center justify-center w-full">
+          {/* TODO: Change SVG and bg-color based on weather condition in API res */}
           <Sunny />
         </div>
       </div>
