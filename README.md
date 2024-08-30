@@ -1,6 +1,6 @@
 # UI Demo
 
-Hi Ben,thanks for taking the time to check out my project!
+Hi Ben, thanks for taking the time to check out my project! I haven't had time to make it perfectly responsive yet, so it's preferable you use a decently large screen to view it!
 
 Welcome to the **UI Demo** repository, where I’ve brought together some of the more recent UI design trends into a single collection of themed interfaces. This project has been both a personal exploration and a way for me to get back into the swing of frontend development. I couldn’t decide on just one theme, so I decided to do them all! Each theme was crafted over the course of a couple days, so feel free to dive in, explore, and hopefully get inspired by the different UI designs.
 
@@ -22,9 +22,9 @@ Welcome to the **UI Demo** repository, where I’ve brought together some of the
 
 ## Introduction
 
-This project came about as a fun way for me to dive back into frontend development by experimenting with various UI/UX design trends. Over the span of a little over a week, I decided to create five distinct design themes, dedicating a couple of days to each one. My goal wasn’t just to capture the visual essence of each trend but also to align the functionality to match the style, ensuring that each theme feels cohesive and true to its design philosophy.
+Over the last two years, my focus has been primarily on machine learning and completing my Master's program. However, my passion for design has recently been reignited when I was exploring ways to present data. This project was a fun way to reimmerse myself in frontend development by exploring various UI/UX design trends. Over a little more than a week, I challenged myself to create five distinct design themes, dedicating a couple of days to each. I started each day by browsing Dribbble for inspiration, sketching wireframes on paper, and considering the best presentation medium for each theme. My objective wasn't just to capture the visual essence of each trend but also to ensure that the functionality aligned with the style, creating a cohesive and authentic representation of each design philosophy.
 
-Each theme is its own mini-project, showcasing the unique characteristics and interactions associated with that particular design trend. I also integrated a few APIs and modern frontend tools to make the experience more dynamic and interactive.
+Each theme is its own mini-project, showcasing the unique characteristics and interactions associated with that particular design trend. I recommend first reading through the description and key features for each theme as you explore them on the live demo.  I also integrated a few APIs and modern frontend tools to make the experience more dynamic and interactive.
 
 ## Live Demo
 
@@ -39,9 +39,9 @@ Neubrutalism is a bold, unapologetic design style that draws inspiration from th
 
 **Key Features:**
 
-- Bold, geometric layouts with strong color contrasts.
-- GSAP-driven animations that enhance the visual impact.
-- A focus on functionality with a distinctly raw UI.
+- This style is characterized by raw, utilitarian design elements with a strong emphasis on geometry and high contrast.
+- Prioritizes functionality with an intentionally unrefined user interface.
+- Utilizes GSAP animations to amplify the bold and striking visual impact of the design.
 
 **Future Improvements**
 
@@ -57,9 +57,9 @@ Neumorphism combines elements of skeuomorphism and flat design, creating soft, e
 
 **Key Features:**
 
-- Soft shadows and highlights create a 3D effect.
-- Interactive buttons and controls that respond smoothly.
-- A dashboard layout that emphasizes clarity and subtlety.
+- This style has soft, extruded shapes with gentle shadows and highlights to create a subtle 3D effect.
+- Smooth, responsive interactions with buttons and controls that enhance the tactile feel.
+- A clean, minimalist dashboard layout that prioritizes clarity and subtle design elements.
 
 **Future Improvements**
 
@@ -71,14 +71,14 @@ Neumorphism combines elements of skeuomorphism and flat design, creating soft, e
 ### Bauhaus (Day 4)
 
 **Description:**  
-Inspired by the Bauhaus art movement, this theme emphasizes geometric shapes, primary colors, and a focus on simplicity and functionality. The Bauhaus design is implemented as a weather app, which, in my opinion, looks best on mobile. The desktop version features a calendar and color blocks alongside shapes inspired by Bauhaus geometric patterns to fill the space and maintain visual balance.
+Inspired by the Bauhaus art movement, this theme emphasizes geometric shapes, primary colors, and a focus on simplicity and functionality. The Bauhaus design is implemented as a weather app, which, in my opinion, looks best on mobile. The desktop version features a calendar and color blocks alongside shapes inspired by Bauhaus geometric patterns to fill the space and maintain visual balance. Input a city into the top left and hit enter to search. The calendar on the right also allows you to select between today and the next two days to retrieve the weather forecast. 
 
 **Key Features:**
 
-- Strong geometric designs and patterns.
-- Dynamic background colors and SVG graphics.
-- A modular layout that’s both functional and visually appealing.
-
+- This style is defined by its use of precise geometric shapes, grid-based layouts, and balanced compositions that prioritize functionality and harmony. 
+- Integration with the Weather API to provide real-time weather data, enhancing the app's practicality and user experience.
+- A clickable calendar feature that allows users to view weather forecasts for selected dates.
+  
 **Future Improvements**
 
 - Add more custom SVGs and background colors that dynamically change based on the weather from the API response.
@@ -89,18 +89,18 @@ Inspired by the Bauhaus art movement, this theme emphasizes geometric shapes, pr
 ### Glassmorphism (Days 5-6)
 
 **Description:**  
-Glassmorphism is characterized by translucent elements and frosted glass effects layered over vibrant backgrounds. For this theme, I created a Spotify player that interacts with the Spotify API. Ideally, I should have used the Spotify Playback SDK, which is on my to-do list. As it stands, the player requires a Spotify account and an active session on a different device to work correctly, which I recognize is not ideal.
+Glassmorphism is characterized by translucent elements and frosted glass effects layered over vibrant backgrounds. For this theme, I created a Spotify player that interacts with the Spotify API. Ideally, I should have used the Spotify Playback SDK, which is on my to-do list. As it stands, the player requires a Spotify account and an active session on a different device to work correctly, which I recognize is not ideal. It's basically no more than a remote control without the playback SDK. To make it work, login to Spotify through the demo. Then open Spotify on your phone or desktop app to create an active session (may require you to play/pause a song if previously inactive) and keep it open in the background. Finally, refresh the demo. Hovering on the left side of the screen will also allow you to search for a song to play. 
 
 **Key Features:**
 
-- Transparent cards and containers with a glass-like effect.
+- This style showcases translucent cards and containers with frosted glass effects, creating a sense of depth and layering.
 - Integration with the Spotify API for dynamic content.
-- Interactive media controls with a sleek, modern design.
+- Features a song search functionality and a light/dark mode toggle, offering users customization and an enhanced interactive experience.
 
 **Future Improvements**
 
 - Implement the Spotify Web Playback SDK for better performance and reduce the number of API calls.
-- Improve authorization by using OAuth 2.0 flow.
+- Integration with the Spotify API to deliver dynamic, real-time music content.
 - Finish converting to jotai and fix file structure.
 
 **Screenshots:**
@@ -108,18 +108,18 @@ Glassmorphism is characterized by translucent elements and frosted glass effects
 ### Retro Futurism (Days 7-9)
 
 **Description:**  
-Retro Futurism combines nostalgic design elements with futuristic concepts, creating a visually rich and engaging experience. This is the theme I’m most proud of, as it showcases some of my photography through a Three.js project. To represent the 'retro' aspect, I used a magazine format to display my photos. The 'futurism' part is represented by a dynamic mesh of dots that move in a wave pattern, adding a modern, tech-forward feel to the presentation.
+Retro Futurism combines nostalgic design elements with futuristic concepts, creating a visually rich and engaging experience. This is the theme I’m most proud of, as it showcases some of my hobby photography through a Three.js project. To represent the 'retro' aspect, I used grays and mono fonts, as well as a magazine format to display my photos. The 'futurism' aspect is represented by a dynamic mesh of dots that move in a wave pattern, adding a modern, tech-forward feel to the presentation. Hover and click on the pages to flip through the magazine. You can also change books on the left pagination to view more photos. 
 
 **Key Features:**
 
-- Bold, contrasting colors and geometric patterns.
-- Three.js integration for a 3D, interactive experience.
-- A magazine-style layout to showcase photography.
-- Dynamic animations and mesh effects that embody the futuristic theme.
+- This style combines vintage design elements with futuristic technology, featuring bold typography, neon accents, and sleek metallic textures.
+- Emphasizes a blend of nostalgia and innovation, incorporating 3D elements, dynamic animations, and minimalistic, yet impactful, layouts.
+- Utilizes a magazine-style layout to effectively showcase digital photography in a retro-futuristic context.
+- Incorporates dynamic animations and mesh effects that capture the essence of a futuristic, tech-driven aesthetic.
 
 **Future Improvements**
 
-- Add more photos.
+- Add more of my photos.
 - Add a loading screen for the books.
 - Improve mobile responsiveness.
 - Finish converting to jotai and fix file structure.
