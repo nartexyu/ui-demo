@@ -49,7 +49,7 @@ Neubrutalism is a bold, unapologetic design style that draws inspiration from th
 - Improve mobile responsiveness and integrate animations.
 
 **Screenshots:**
-![Neubrutalism Screenshot](/screenshots/Neubrutalism.PNG)
+![Neubrutalism Screenshot](/public/screenshots/Neubrutalism.PNG)
 
 ### Neumorphism (Day 3)
 
@@ -68,7 +68,7 @@ Neumorphism combines elements of skeuomorphism and flat design, creating soft, e
 - React-dnd to be able to customize the layout the bento-box grid.
 
 **Screenshots:**
-![Neumorphism Screenshot](/screenshots/Neumorphism.PNG)
+![Neumorphism Screenshot](/public/screenshots/Neumorphism.PNG)
 
 ### Bauhaus (Day 4)
 
@@ -87,7 +87,7 @@ Inspired by the Bauhaus art movement, this theme emphasizes geometric shapes, pr
 - Make it more Bauhaus-y.
 
 **Screenshots:**
-![Bauhaus Screenshot](/screenshots/Bauhaus.PNG)
+![Bauhaus Screenshot](/public/screenshots/Bauhaus.PNG)
 
 ### Glassmorphism (Days 5-6)
 
@@ -107,8 +107,8 @@ Glassmorphism is characterized by translucent elements and frosted glass effects
 - Finish converting to jotai and fix file structure.
 
 **Screenshots:**
-![Glassmophism Screenshot 1](/screenshots/Glassmophism%202.PNG)
-![Glassmophism Screenshot 2](/screenshots/Glassmophism%201.PNG)
+![Glassmophism Screenshot 1](/public/screenshots/Glassmophism%202.PNG)
+![Glassmophism Screenshot 2](/public/screenshots/Glassmophism%201.PNG)
 
 ### Retro Futurism (Days 7-9)
 
@@ -130,7 +130,7 @@ Retro Futurism combines nostalgic design elements with futuristic concepts, crea
 - Finish converting to jotai and fix file structure.
 
 **Screenshots:**
-![Retro-Futurism Screenshot 1](/screenshots/Retro-futurism.PNG)
+![Retro-Futurism Screenshot 1](/public/screenshots/Retro-futurism.PNG)
 
 ## Technologies Used
 
