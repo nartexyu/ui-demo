@@ -97,13 +97,12 @@ Glassmorphism is characterized by translucent elements and frosted glass effects
 **Key Features:**
 
 - This style showcases translucent cards and containers with frosted glass effects, creating a sense of depth and layering.
-- Integration with the Spotify API for dynamic content.
+- Integration with the Spotify API to deliver dynamic, real-time music content.
 - Features a song search functionality and a light/dark mode toggle, offering users customization and an enhanced interactive experience.
 
 **Future Improvements**
 
 - Implement the Spotify Web Playback SDK for better performance and reduce the number of API calls.
-- Integration with the Spotify API to deliver dynamic, real-time music content.
 - Finish converting to jotai and fix file structure.
 
 **Screenshots:**
