@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { books } from "../components/Retro-futurism/FuturismPages";
 
 // Theme atom to manage theme with initial value from localStorage or default to 'neubrutalism'
 export const themeAtom = atom(
@@ -42,3 +43,8 @@ export const searchAtom = atom({
   searchResults: [],
 });
 export const lightModeAtom = atom(true)
+
+// Retro-futurism
+export const pageAtom = atom(0);
+export const bookAtom = atom(0);
+export const pagesAtom = atom([]);

@@ -6,7 +6,6 @@ const europe = ['europe_1', 'europe_2', 'europe_3', 'europe_4'];
 const landscape = ['landscape_1', 'landscape_2', 'landscape_3', 'landscape_4', 'landscape_5', 'japan_3']; // Another book's pictures
 
 export const pageAtom = atom(0);
-export const bookAtom = atom(0); // Current book index
 
 const createPages = (pictures) => {
   const pages = [
@@ -28,10 +27,15 @@ const createPages = (pictures) => {
   return pages;
 };
 
+const japanPages = createPages(japan);
+const hawaiiPages = createPages(hawaii);
+const europePages = createPages(europe);
+const landscapePages = createPages(landscape);
+
 export const books = [
-  { title: "Japan", pages: createPages(japan) },
-  { title: "Hawaii", pages: createPages(hawaii) },
-  { title: "Europe", pages: createPages(europe) },
-  { title: "Landscape", pages: createPages(landscape) },
+  { title: "Japan", pages: japanPages },
+  { title: "Hawaii", pages: hawaiiPages },
+  { title: "Europe", pages: europePages },
+  { title: "Landscape", pages: landscapePages },
   // Add more books as needed
 ];
