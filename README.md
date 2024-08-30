@@ -14,15 +14,11 @@ Welcome to the **UI Demo** repository, where I’ve brought together some of the
   - [Bauhaus](#bauhaus)
   - [Glassmorphism](#glassmorphism)
   - [Retro Futurism](#retro-futurism)
-- [Upcoming Improvements](#upcoming-improvements)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
-- [Project Structure](#project-structure)
-- [License](#license)
-- [Contact](#contact)
 
 ## Introduction
 
