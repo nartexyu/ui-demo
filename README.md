@@ -24,7 +24,7 @@ Welcome to the **UI Demo** repository, where I’ve brought together some of the
 
 Over the last two years, my focus has been primarily on machine learning and completing my Master's program. However, my passion for design has recently been reignited when I was exploring ways to present data. This project was a fun way to reimmerse myself in frontend development by exploring various UI/UX design trends. Over a little more than a week, I challenged myself to create five distinct design themes, dedicating a couple of days to each. I started each day by browsing Dribbble for inspiration, sketching wireframes on paper, and considering the best presentation medium for each theme. My objective wasn't just to capture the visual essence of each trend but also to ensure that the functionality aligned with the style, creating a cohesive and authentic representation of each design philosophy.
 
-Each theme is its own mini-project, showcasing the unique characteristics and interactions associated with that particular design trend. I recommend first reading through the description and key features for each theme as you explore them on the live demo.  I also integrated a few APIs and modern frontend tools to make the experience more dynamic and interactive.
+Each theme is its own mini-project, showcasing the unique characteristics and interactions associated with that particular design trend. I recommend first reading through the description and key features for each theme as you explore them on the live demo. I also integrated a few APIs and modern frontend tools to make the experience more dynamic and interactive.
 
 ## Live Demo
 
@@ -49,6 +49,7 @@ Neubrutalism is a bold, unapologetic design style that draws inspiration from th
 - Improve mobile responsiveness and integrate animations.
 
 **Screenshots:**
+![Neubrutalism Screenshot](assets/screenshots/Neubrutalism.PNG)
 
 ### Neumorphism (Day 3)
 
@@ -67,29 +68,31 @@ Neumorphism combines elements of skeuomorphism and flat design, creating soft, e
 - React-dnd to be able to customize the layout the bento-box grid.
 
 **Screenshots:**
+![Neumorphism Screenshot](assets/screenshots/Neumorphism.PNG)
 
 ### Bauhaus (Day 4)
 
 **Description:**  
-Inspired by the Bauhaus art movement, this theme emphasizes geometric shapes, primary colors, and a focus on simplicity and functionality. The Bauhaus design is implemented as a weather app, which, in my opinion, looks best on mobile. The desktop version features a calendar and color blocks alongside shapes inspired by Bauhaus geometric patterns to fill the space and maintain visual balance. Input a city into the top left and hit enter to search. The calendar on the right also allows you to select between today and the next two days to retrieve the weather forecast. 
+Inspired by the Bauhaus art movement, this theme emphasizes geometric shapes, primary colors, and a focus on simplicity and functionality. The Bauhaus design is implemented as a weather app, which, in my opinion, looks best on mobile. The desktop version features a calendar and color blocks alongside shapes inspired by Bauhaus geometric patterns to fill the space and maintain visual balance. Input a city into the top left and hit enter to search. The calendar on the right also allows you to select between today and the next two days to retrieve the weather forecast.
 
 **Key Features:**
 
-- This style is defined by its use of precise geometric shapes, grid-based layouts, and balanced compositions that prioritize functionality and harmony. 
+- This style is defined by its use of precise geometric shapes, grid-based layouts, and balanced compositions that prioritize functionality and harmony.
 - Integration with the Weather API to provide real-time weather data, enhancing the app's practicality and user experience.
 - A clickable calendar feature that allows users to view weather forecasts for selected dates.
-  
+
 **Future Improvements**
 
 - Add more custom SVGs and background colors that dynamically change based on the weather from the API response.
 - Make it more Bauhaus-y.
 
 **Screenshots:**
+![Bauhaus Screenshot](assets/screenshots/Bauhaus.PNG)
 
 ### Glassmorphism (Days 5-6)
 
 **Description:**  
-Glassmorphism is characterized by translucent elements and frosted glass effects layered over vibrant backgrounds. For this theme, I created a Spotify player that interacts with the Spotify API. Ideally, I should have used the Spotify Playback SDK, which is on my to-do list. As it stands, the player requires a Spotify account and an active session on a different device to work correctly, which I recognize is not ideal. It's basically no more than a remote control without the playback SDK. To make it work, login to Spotify through the demo. Then open Spotify on your phone or desktop app to create an active session (may require you to play/pause a song if previously inactive) and keep it open in the background. Finally, refresh the demo. Hovering on the left side of the screen will also allow you to search for a song to play. 
+Glassmorphism is characterized by translucent elements and frosted glass effects layered over vibrant backgrounds. For this theme, I created a Spotify player that interacts with the Spotify API. Ideally, I should have used the Spotify Playback SDK, which is on my to-do list. As it stands, the player requires a Spotify account and an active session on a different device to work correctly, which I recognize is not ideal. It's basically no more than a remote control without the playback SDK. To make it work, login to Spotify through the demo. Then open Spotify on your phone or desktop app to create an active session (may require you to play/pause a song if previously inactive) and keep it open in the background. Finally, refresh the demo. Hovering on the left side of the screen will also allow you to search for a song to play.
 
 **Key Features:**
 
@@ -104,11 +107,13 @@ Glassmorphism is characterized by translucent elements and frosted glass effects
 - Finish converting to jotai and fix file structure.
 
 **Screenshots:**
+![Glassmophism Screenshot 1](assets/screenshots/Glassmophism%202.PNG)
+![Glassmophism Screenshot 2](assets/screenshots/Glassmophism%201.PNG)
 
 ### Retro Futurism (Days 7-9)
 
 **Description:**  
-Retro Futurism combines nostalgic design elements with futuristic concepts, creating a visually rich and engaging experience. This is the theme I’m most proud of, as it showcases some of my hobby photography through a Three.js project. To represent the 'retro' aspect, I used grays and mono fonts, as well as a magazine format to display my photos. The 'futurism' aspect is represented by a dynamic mesh of dots that move in a wave pattern, adding a modern, tech-forward feel to the presentation. Hover and click on the pages to flip through the magazine. You can also change books on the left pagination to view more photos. 
+Retro Futurism combines nostalgic design elements with futuristic concepts, creating a visually rich and engaging experience. This is the theme I’m most proud of, as it showcases some of my hobby photography through a Three.js project. To represent the 'retro' aspect, I used grays and mono fonts, as well as a magazine format to display my photos. The 'futurism' aspect is represented by a dynamic mesh of dots that move in a wave pattern, adding a modern, tech-forward feel to the presentation. Hover and click on the pages to flip through the magazine. You can also change books on the left pagination to view more photos.
 
 **Key Features:**
 
@@ -125,6 +130,7 @@ Retro Futurism combines nostalgic design elements with futuristic concepts, crea
 - Finish converting to jotai and fix file structure.
 
 **Screenshots:**
+![Retro-Futurism Screenshot 1](assets/screenshots/Retro-futurism.PNG)
 
 ## Technologies Used
 
