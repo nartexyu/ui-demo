@@ -49,7 +49,7 @@ Neubrutalism is a bold, unapologetic design style that draws inspiration from th
 - Improve mobile responsiveness and integrate animations.
 
 **Screenshots:**
-![Neubrutalism Screenshot](/public/screenshots/Neubrutalism.PNG)
+![Neubrutalism Screenshot](/public/screenshots/Neubrutalism.png)
 
 ### Neumorphism (Day 3)
 
@@ -107,8 +107,8 @@ Glassmorphism is characterized by translucent elements and frosted glass effects
 - Finish converting to jotai and fix file structure.
 
 **Screenshots:**
-![Glassmophism Screenshot 1](/public/screenshots/Glassmophism%202.PNG)
-![Glassmophism Screenshot 2](/public/screenshots/Glassmophism%201.PNG)
+![Glassmophism Screenshot 1](/public/screenshots/Glassmorphism%202.PNG)
+![Glassmophism Screenshot 2](/public/screenshots/Glassmorphism%201.PNG)
 
 ### Retro Futurism (Days 7-9)
 
