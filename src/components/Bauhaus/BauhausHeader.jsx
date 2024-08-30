@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useAtom } from "jotai";
+import { themeAtom, isMenuOpenAtom } from "../../atoms/atoms";
 
-const BauhausHeader = ({ setTheme }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const BauhausHeader = () => {
+  const [isMenuOpen, setIsMenuOpen] = useAtom(isMenuOpenAtom);
+  const [, setTheme] = useAtom(themeAtom);
 
   return (
     <header>

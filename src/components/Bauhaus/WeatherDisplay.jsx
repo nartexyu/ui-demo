@@ -8,7 +8,7 @@ import {
   yAxisMinAtom,
   yAxisMaxAtom,
   weatherDataAtom,
-} from "../../atoms/bauhausAtoms";
+} from "../../atoms/atoms";
 import { handleInputChange } from "../../utils/Bauhaus/handleInputChange";
 import { handleSubmit } from "../../utils/Bauhaus/handleSubmit";
 import { fetchWeatherData } from "../../utils/Bauhaus/fetchWeatherData";

@@ -7,32 +7,42 @@ import BauhausHeader from './Bauhaus/BauhausHeader';
 import RfHeader from './Retro-futurism/RfHeader';
 import Neubrutalism from './Neubrutalism/NbHeader';
 
-const Header = ({ theme, setTheme, nmMobile, setnmMobile }) => {
+import { useAtom } from 'jotai';
+import { themeAtom } from '../atoms/atoms';
+
+const Header = () => {
+    const [theme] = useAtom(themeAtom);
+
+    useEffect(() => {
+    // Store the selected theme in localStorage whenever it changes
+        localStorage.setItem("selectedTheme", theme);
+    }, [theme]);
+
     const renderHeaderContent = () => {
         switch (theme) {
             case 'neubrutalism':
                 return (
-                    <NbHeader setTheme={setTheme} />          
+                    <NbHeader />          
                 );
             case 'bauhaus':
                 return (
-                    <BauhausHeader setTheme={setTheme}/>
+                    <BauhausHeader />
                 );
             case 'neumorphism':
                 return (
-                    <NmHeader setTheme={setTheme} nmMobile={nmMobile} setnmMobile={setnmMobile}/>
+                    <NmHeader />
                 );
             case 'retro-futurism':
                 return (
-                    <RfHeader setTheme={setTheme} />
+                    <RfHeader />
                 );
             case 'glassmorphism':
                 return (
-                    <GlassHeader setTheme={setTheme}/>
+                    <GlassHeader />
                 )
             default:
                 return ( 
-                    <NbHeader setTheme={setTheme} />
+                    <NbHeader />
                 );
         }
     };

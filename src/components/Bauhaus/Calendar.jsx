@@ -16,7 +16,7 @@ import {
   hourlyDataAtom,
   yAxisMinAtom,
   yAxisMaxAtom,
-} from "../../atoms/bauhausAtoms";
+} from "../../atoms/atoms";
 import { handleSelectDate } from "../../utils/Bauhaus/handleSelectDate";
 import ColorGrid from "./ColorGrid";
 
