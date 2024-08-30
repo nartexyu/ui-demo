@@ -5,7 +5,14 @@ import {
   currentThemeIndexAtom,
   tokenAtom,
   themeAtom,
-} from "../../atoms/atoms"; // Import the atoms
+} from "../../atoms/atoms";
+
+import { handleLogin } from "../../utils/Glassmorphism/handleLogin";
+import { handleLogout } from "../../utils/Glassmorphism/handleLogout";
+import { handleDragStart } from "../../utils/Glassmorphism/handleDragStart";
+import { handleDragEnd } from "../../utils/Glassmorphism/handleDragEnd";
+import { rotateTheme } from "../../utils/Glassmorphism/rotateTheme";
+import { handleClick } from "../../utils/Glassmorphism/handleClick";
 
 const GlassHeader = () => {
   const themes = [
@@ -16,68 +23,12 @@ const GlassHeader = () => {
     "neubrutalism",
   ];
   const startXRef = useRef(null);
-
-  // Use atoms instead of useState
   const [fade, setFade] = useAtom(fadeAtom);
   const [currentThemeIndex, setCurrentThemeIndex] = useAtom(
     currentThemeIndexAtom
   );
   const [token, setToken] = useAtom(tokenAtom);
   const [, setTheme] = useAtom(themeAtom);
-
-  // Function to handle Spotify login redirection
-  const handleLogin = () => {
-    const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-    const redirectUri = "https://ui-demo-psi.vercel.app/";
-    const scopes = [
-      "user-read-playback-state",
-      "user-modify-playback-state",
-      "user-read-currently-playing",
-      "user-read-recently-played",
-    ];
-
-    window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-      "%20"
-    )}&response_type=token&show_dialog=true`;
-  };
-
-  // Function to handle Spotify logout
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken(""); // Clear the token in the atom
-    console.log("Token deleted");
-  };
-
-  // Function to capture position of drag/swipe for mobile header
-  const handleDragStart = (e) => {
-    startXRef.current = e.clientX || e.touches[0].clientX;
-  };
-
-  // Function to handle end of drag/swipe, rotating the theme
-  const handleDragEnd = (e) => {
-    const endX = e.clientX || e.changedTouches[0].clientX;
-    if (endX > startXRef.current + 50) {
-      rotateTheme(1);
-    } else if (endX < startXRef.current - 50) {
-      rotateTheme(-1);
-    }
-  };
-
-  // Function to rotate the theme based on direction for mobile header
-  const rotateTheme = (direction) => {
-    setFade(true);
-    setTimeout(() => {
-      setCurrentThemeIndex(
-        (prevIndex) => (prevIndex + direction + themes.length) % themes.length
-      );
-      setFade(false);
-    }, 200); // Duration of the fade-out transition
-  };
-
-  // Function to set theme on click
-  const handleClick = (theme) => {
-    setTheme(theme.toLowerCase());
-  };
 
   return (
     <header className="fixed h-[10%] w-screen bg-transparent z-10 text-white drop-shadow-lg">
@@ -88,11 +39,19 @@ const GlassHeader = () => {
           className={`col-span-1 font-medium h-full flex items-center justify-center cursor-pointer transition-opacity duration-200 ${
             fade ? "opacity-0" : "opacity-100"
           }`}
-          onMouseDown={handleDragStart}
-          onMouseUp={handleDragEnd}
-          onTouchStart={handleDragStart}
-          onTouchEnd={handleDragEnd}
-          onClick={() => handleClick(themes[currentThemeIndex])}
+          onMouseDown={(e) => handleDragStart(e, startXRef)}
+          onMouseUp={(e) =>
+            handleDragEnd(e, startXRef, (direction) =>
+              rotateTheme(direction, setFade, setCurrentThemeIndex, themes)
+            )
+          }
+          onTouchStart={(e) => handleDragStart(e, startXRef)}
+          onTouchEnd={(e) =>
+            handleDragEnd(e, startXRef, (direction) =>
+              rotateTheme(direction, setFade, setCurrentThemeIndex, themes)
+            )
+          }
+          onClick={() => handleClick(themes[currentThemeIndex], setTheme)}
         >
           {themes[currentThemeIndex].toUpperCase()}
         </div>
@@ -100,7 +59,7 @@ const GlassHeader = () => {
           {token ? (
             <button
               className="font-normal px-6 py-2 bg-blue-600 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-full"
-              onClick={handleLogout}
+              onClick={() => handleLogout(setToken)}
             >
               Logout
             </button>
@@ -124,7 +83,7 @@ const GlassHeader = () => {
           <div
             key={index}
             className="col-span-1 font-normal h-full flex items-center justify-center cursor-pointer hover:scale-105 transition duration-300 ease-in-out hover:drop-shadow-lg"
-            onClick={() => setTheme(theme.toLowerCase())}
+            onClick={() => handleClick(theme.toLowerCase(), setTheme)}
           >
             {theme.charAt(0).toUpperCase() + theme.slice(1)}
           </div>
@@ -134,7 +93,7 @@ const GlassHeader = () => {
           {token ? (
             <button
               className="font-normal px-6 py-2 bg-blue-600 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-full"
-              onClick={handleLogout}
+              onClick={() => handleLogout(setToken)}
             >
               Logout
             </button>
