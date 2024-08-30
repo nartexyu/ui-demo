@@ -1,6 +1,6 @@
 # UI Demo
 
-Hi Ben, thanks for taking the time to check out my project! I haven't had time to make it perfectly responsive yet, so it's preferable you use a decently large screen to view it!
+Hi Ben, thanks for taking the time to check out my project! I haven't had time to make it perfectly responsive yet, so it's preferable for you to use a decently large screen to view it!
 
 Welcome to the **UI Demo** repository, where I’ve brought together some of the more recent UI design trends into a single collection of themed interfaces. This project has been both a personal exploration and a way for me to get back into the swing of frontend development. I couldn’t decide on just one theme, so I decided to do them all! Each theme was crafted over the course of a couple days, so feel free to dive in, explore, and hopefully get inspired by the different UI designs.
 
