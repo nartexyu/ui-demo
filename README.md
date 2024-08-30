@@ -130,23 +130,14 @@ Retro Futurism combines nostalgic design elements with futuristic concepts, crea
 
 **Screenshots:**
 
-## Upcoming Improvements
-
-- **File Structure Refactoring:** I’m in the process of reorganizing the project’s file structure to make it more maintainable and scalable as it grows.
-- **State Management Conversion:** I’m transitioning the state management to [Jotai](https://jotai.org/) to streamline the code and improve performance.
-- **Performance Optimizations:** I’ll be implementing lazy loading and code-splitting to make the application faster and more efficient.
-- **Accessibility Enhancements:** I’m working to ensure that all themes meet accessibility standards (WCAG) to provide a better user experience for everyone.
-- **Cross-Browser Compatibility:** I’m testing and adjusting the designs to make sure they look great and function well across all major browsers.
-
 ## Technologies Used
 
 - **Frontend Framework:** [React](https://reactjs.org/)
 - **State Management:** [Jotai](https://jotai.org/)
-- **Styling:** CSS Modules, SCSS, and styled-components
+- **Styling:** Tailwindcss
 - **API Integrations:**
   - [Spotify API](https://developer.spotify.com/documentation/web-api/)
-  - [OpenWeather API](https://openweathermap.org/api) _(planned)_
-- **Tooling and Bundling:** [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/)
+  - [Weather API](https://www.weatherapi.com/docs/)
 - **Version Control:** [Git](https://git-scm.com/)
 - **Package Management:** [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
@@ -194,69 +185,3 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 2. **Access the Application:**
    Open your browser and navigate to `http://localhost:3000` to view the application.
-
-3. **Building for Production:**
-
-   ```bash
-   # Using npm
-   npm run build
-
-   # Or using yarn
-   yarn build
-   ```
-
-   The optimized production build will be available in the `build` directory.
-
-## Project Structure
-
-```
-ui-demo/
-├── public/
-│   ├── index.html
-│   └── assets/
-│       └── images/
-├── src/
-│   ├── components/
-│   │   ├── Neumorphism/
-│   │   ├── Glassmorphism/
-│   │   ├── RetroFuturism/
-│   │   ├── Minimalism/
-│   │   └── Bauhaus/
-│   ├── styles/
-│   ├── state/
-│   ├── utils/
-│   ├── App.js
-│   └── index.js
-├── .gitignore
-├── package.json
-├── README.md
-└── webpack.config.js
-```
-
-**Description:**
-
-- `public/`: Contains static files and the main HTML template.
-- `src/`: Main source code for the application.
-  - `components/`: Individual theme components.
-  - `styles/`: Global and theme-specific styles.
-  - `state/`: Jotai atoms and state management logic.
-  - `utils/`: Helper functions and utility modules.
-  - `App.js`: Root component managing routing and layout.
-  - `index.js`: Entry point of the application.
-- `webpack.config.js`: Configuration for webpack bundler.
-- `package.json`: Lists project dependencies and scripts.
-
-_(Note: The project structure is subject to change as refactoring progresses.)_
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this software in accordance with the license terms.
-
-## Contact
-
-**Author:** Nathaniel Yu  
-**GitHub:** [nartexyu](https://github.com/nartexyu)  
-**Email:** your.email@example.com  
-**LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/yourprofile/)
-
-Feel free to reach out for any inquiries, suggestions, or collaborations!
