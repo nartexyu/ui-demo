@@ -15,8 +15,6 @@ const ThreeCanvas = () => {
     setPages(books[currentBook].pages || []);
   }, [currentBook, setPages]);
 
-  console.log("Pages:", pages); // Log to check if pages are correctly fetched
-
   return (
     <Canvas shadows camera={{ position: [-0.5, 1, 4], fov: 45 }}>
       <group position-y={0}>
